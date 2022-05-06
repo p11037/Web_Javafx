@@ -29,7 +29,7 @@ import javafx.stage.Stage;
 
 public class App extends Application implements Serializable {
 
-    
+    int source_status = 0;
     String str ="http://google.com";
 
     public static void main(String[] args) throws Exception {
@@ -208,6 +208,11 @@ public class App extends Application implements Serializable {
         
         BtSource.setOnMouseClicked(e -> {
             try {
+                if(source_status == 1){
+                    source_status = 0;
+                    splitPane.getItems().remove(1);
+                } else {
+                source_status = 1;
                 textarea.clear();
                 textarea.setEditable(false);
                 System.out.println(splitPane.getItems().size());
@@ -217,6 +222,7 @@ public class App extends Application implements Serializable {
                     textarea.appendText(document.outerHtml());
                     textarea.setScrollTop(0.0);
                     textarea.setScrollLeft(0);
+                }
             } catch (Exception ex) {
                 System.out.println(e.toString());
             }
